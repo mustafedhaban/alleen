@@ -28,13 +28,17 @@ BentoGrid.displayName = "BentoGrid";
  * BentoGridItem is a flexible component designed to be a child of BentoGrid.
  * It provides a consistent structure with a header, title, and description,
  * and now includes a subtle scaling effect on hover.
+/**
+ * BentoGridItem is a flexible component designed to be a child of BentoGrid.
+ * It provides a consistent structure with a header, title, and description,
+ * and now includes a subtle scaling effect on hover.
  */
-interface BentoGridItemProps extends React.HTMLAttributes<HTMLDivElement> {
+type BentoGridItemProps = Omit<React.HTMLAttributes<HTMLDivElement>, 'title'> & {
   title?: string | React.ReactNode;
   description?: string | React.ReactNode;
   header?: React.ReactNode;
   icon?: React.ReactNode;
-}
+};
 
 const BentoGridItem = React.forwardRef<HTMLDivElement, BentoGridItemProps>(
   ({ className, title, description, header, icon, ...props }, ref) => {
