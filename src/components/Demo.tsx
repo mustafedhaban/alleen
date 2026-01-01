@@ -5,7 +5,7 @@ function Demo() {
   return (
     <div className="w-full">
       <Footer
-        logo={<img src="./logo.png" alt="logo" className="h-10 w-auto" />}
+        logo={<img src="./logo.png" alt="logo" className="h-8 w-auto" />}
         
         socialLinks={[
           {

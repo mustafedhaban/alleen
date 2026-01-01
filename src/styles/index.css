@@ -1,7 +1,6 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import "tailwindcss";
 :root {
   color-scheme: light;
 }
@@ -42,6 +41,10 @@ html, body, #root { height: 100%; }
   @apply btn border-2 border-primary text-primary;
   @apply hover:bg-primary hover:text-white focus:ring-primary/30;
   @apply hover:scale-[1.02] active:scale-[0.98];
+}
+.btn-secondary { 
+  @apply btn border-2 border-secondary  hover:bg-secondary/90 active:bg-secondary;
+  @apply focus:ring-secondary/30 hover:scale-[1.02] active:scale-[0.98];
 }
 
 /* Enhanced Card Styles */

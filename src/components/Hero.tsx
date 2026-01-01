@@ -1,108 +1,157 @@
-import React from 'react'
+import { useRef } from 'react'
 import { Section } from './Section'
+import gsap from 'gsap'
+import { useGSAP } from '@gsap/react'
+import { IconArrowRight, IconSparkles } from '@tabler/icons-react'
 
 export function Hero() {
+  const containerRef = useRef<HTMLDivElement>(null)
+  const badgeRef = useRef<HTMLDivElement>(null)
+  const titleRef = useRef<HTMLHeadingElement>(null)
+  const textRef = useRef<HTMLParagraphElement>(null)
+  const buttonsRef = useRef<HTMLDivElement>(null)
+  const statsRef = useRef<HTMLDivElement>(null)
+  const valuesRef = useRef<HTMLDivElement>(null)
+
+  useGSAP(() => {
+    const tl = gsap.timeline({ defaults: { ease: 'power3.out' } })
+
+    tl.from(badgeRef.current, {
+      y: 20,
+      opacity: 0,
+      duration: 0.6,
+    })
+    .from(titleRef.current, {
+      y: 30,
+      opacity: 0,
+      duration: 0.8,
+    }, '-=0.4')
+    .from(textRef.current, {
+      y: 20,
+      opacity: 0,
+      duration: 0.6,
+    }, '-=0.6')
+    .from(buttonsRef.current, {
+      y: 20,
+      opacity: 0,
+      duration: 0.6,
+    }, '-=0.4')
+    .from(statsRef.current ? statsRef.current.children : [], {
+      y: 20,
+      opacity: 0,
+      duration: 0.5,
+      stagger: 0.1,
+    }, '-=0.2')
+    .from(valuesRef.current ? valuesRef.current.children : [], {
+      y: 10,
+      opacity: 0,
+      duration: 0.4,
+      stagger: 0.05,
+    }, '-=0.2')
+
+  }, { scope: containerRef })
+
   return (
-    <div className="relative overflow-hidden bg-gradient-to-br from-slate-50 via-white to-primary/5">
-      {/* Animated Background */}
+    <div
+      ref={containerRef}
+      className="relative overflow-hidden w-screen bg-cover bg-center min-h-screen flex items-center"
+      style={{ backgroundImage: "url('/hero2.jpg')" }}
+    >
+      {/* Enhanced overlay layers */}
+      <div className="absolute inset-0 bg-gradient-to-br from-slate-900/60 via-slate-900/40 to-primary/30" aria-hidden="true" />
       <div className="absolute inset-0 bg-hero-texture" aria-hidden="true" />
-      <div className="absolute inset-0 bg-grid-slate-100 [mask-image:linear-gradient(0deg,white,rgba(255,255,255,0.6))] opacity-30" aria-hidden="true" />
+      <div className="absolute inset-0 bg-grid-primary/5 [mask-image:linear-gradient(0deg,transparent,white,transparent)]" aria-hidden="true" />
       
       <Section>
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 py-20 sm:py-28 lg:py-32 relative">
-          {/* Left Content */}
-          <div className="relative space-y-8 animate-fade-in-up">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium shadow-sm">
-              <span className="h-2 w-2 rounded-full bg-primary animate-pulse"></span>
-              Strategic Consulting Excellence
-            </div>
-            
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 leading-[1.1]">
-              Strategic Consulting for{' '}
-              <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-                Impact
-              </span>{' '}
-              in Somalia & the Somali Region
-            </h1>
-           
-            
-            <p className="text-lg sm:text-xl text-slate-700 leading-relaxed max-w-2xl">
-              Empowering NGOs, government entities, and socially-conscious businesses with evidence-based strategies,
-              organizational strengthening, and data-driven program development for sustainable social impact.
-            </p>
-            
-            <div className="flex flex-wrap gap-4 pt-2">
-              <a href="#contact" className="btn-primary px-6 py-3.5 text-base">
-                Get in Touch
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                </svg>
-              </a>
-              <a href="#services" className="btn-outline px-6 py-3.5 text-base">
-                Our Services
-              </a>
-            </div>
-            
-            {/* Stats */}
-            <div className="grid grid-cols-3 gap-6 pt-8 border-t border-slate-200">
-              <div className="animate-fade-in-up delay-100">
-                <div className="text-3xl font-bold text-primary">50+</div>
-                <div className="text-sm text-slate-600 mt-1">Projects Delivered</div>
+        <div className="relative mx-auto max-w-7xl py-24 sm:py-32 lg:py-40">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            {/* Left Column - Main Content */}
+            <div className="space-y-8 text-center lg:text-left">
+              {/* Badge */}
+              <div className="flex justify-center lg:justify-start">
+                <div ref={badgeRef} className="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full bg-white/95 backdrop-blur-md text-primary text-sm font-semibold shadow-lg border border-primary/10">
+                  <IconSparkles className="h-4 w-4" />
+                  Strategic Consulting Excellence
+                </div>
               </div>
-              <div className="animate-fade-in-up delay-200">
-                <div className="text-3xl font-bold text-primary">8</div>
-                <div className="text-sm text-slate-600 mt-1">Sectors Covered</div>
+
+              {/* Main Heading */}
+              <div className="space-y-6">
+                <h1 ref={titleRef} className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-white leading-[1.1]">
+                  Strategic Consulting for{' '}
+                  <span className="block mt-2 bg-gradient-to-r from-accent via-primary to-accent bg-clip-text text-transparent animate-gradient">
+                    Lasting Impact
+                  </span>
+                </h1>
+                
+                <p ref={textRef} className="text-lg sm:text-xl text-slate-100 leading-relaxed max-w-2xl mx-auto lg:mx-0">
+                  Empowering NGOs, government entities, and socially-conscious businesses with evidence-based strategies and data-driven solutions for sustainable social impact in the Somali Region.
+                </p>
               </div>
-              <div className="animate-fade-in-up delay-300">
-                <div className="text-3xl font-bold text-primary">100%</div>
-                <div className="text-sm text-slate-600 mt-1">Client Satisfaction</div>
+
+              {/* CTA Buttons */}
+              <div ref={buttonsRef} className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                <a 
+                  href="#contact" 
+                  className="group inline-flex items-center justify-center gap-2 px-8 py-4 bg-primary hover:bg-primary/90 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105"
+                >
+                  Get in Touch
+                  <IconArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                </a>
+                <a 
+                  href="#services" 
+                  className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white/95 backdrop-blur-md hover:bg-white text-slate-900 font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105"
+                >
+                  Our Services
+                </a>
               </div>
             </div>
-          </div>
-          
-          {/* Right Content */}
-          <div className="relative animate-fade-in-up delay-200">
-            <div className="relative">
-              {/* Decorative Elements */}
-              <div className="absolute -top-4 -right-4 w-72 h-72 bg-gradient-to-br from-primary to-accent rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse-slow" />
-              <div className="absolute -bottom-4 -left-4 w-72 h-72 bg-gradient-to-br from-accent to-primary rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse-slow" style={{animationDelay: '1.5s'}} />
-              
-              <div className="card relative overflow-hidden">
-                <div >
-                  {/* Visual Feature Card */}
-                  <div className="aspect-video rounded-xl bg-gradient-to-br from-primary/10 via-primary/5 to-accent/10 grid place-items-center relative overflow-hidden group">
-                    <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-accent/10" />
-                    {/* <div className="relative text-center p-8 space-y-3">
-                      <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-white shadow-lg mb-2">
-                        <svg className="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                      </div>
-                      <p className="font-semibold text-slate-800">Trusted Excellence</p>
-                      <p className="text-sm text-slate-600">Proven track record across the Horn of Africa</p>
-                    </div> */}
-                     <img src="/hero.jpg" alt="Hero" className="w-full h-auto" />
+
+            {/* Right Column - Stats & Values */}
+            <div className="space-y-6">
+              {/* Stats Card */}
+              <div ref={statsRef} className="bg-white/95 backdrop-blur-md rounded-2xl p-8 shadow-2xl border border-white/20">
+                <div className="grid grid-cols-3 gap-8">
+                  <div className="text-center">
+                    <div className="text-4xl lg:text-5xl font-bold bg-gradient-to-br from-primary to-accent bg-clip-text text-transparent">50+</div>
+                    <div className="text-sm font-medium text-slate-600 mt-2">Projects Delivered</div>
                   </div>
-                  
-                  {/* Core Values Grid */}
-                  <div className="mt-6 grid grid-cols-2 gap-3">
-                    <div className="flex items-center gap-3 p-3 rounded-lg bg-gradient-to-br from-primary/5 to-transparent hover:from-primary/10 transition-colors group">
-                      <div className="h-2 w-2 rounded-full bg-primary group-hover:scale-125 transition-transform" />
-                      <span className="text-sm font-medium text-slate-800">Evidence-based</span>
-                    </div>
-                    <div className="flex items-center gap-3 p-3 rounded-lg bg-gradient-to-br from-accent/5 to-transparent hover:from-accent/10 transition-colors group">
-                      <div className="h-2 w-2 rounded-full bg-accent group-hover:scale-125 transition-transform" />
-                      <span className="text-sm font-medium text-slate-800">Context-driven</span>
-                    </div>
-                    <div className="flex items-center gap-3 p-3 rounded-lg bg-gradient-to-br from-primary/5 to-transparent hover:from-primary/10 transition-colors group">
-                      <div className="h-2 w-2 rounded-full bg-primary group-hover:scale-125 transition-transform" />
-                      <span className="text-sm font-medium text-slate-800">Integrity</span>
-                    </div>
-                    <div className="flex items-center gap-3 p-3 rounded-lg bg-gradient-to-br from-accent/5 to-transparent hover:from-accent/10 transition-colors group">
-                      <div className="h-2 w-2 rounded-full bg-accent group-hover:scale-125 transition-transform" />
-                      <span className="text-sm font-medium text-slate-800">Innovation</span>
-                    </div>
+                  <div className="text-center border-x border-slate-200">
+                    <div className="text-4xl lg:text-5xl font-bold bg-gradient-to-br from-primary to-accent bg-clip-text text-transparent">8</div>
+                    <div className="text-sm font-medium text-slate-600 mt-2">Sectors Covered</div>
                   </div>
+                  <div className="text-center">
+                    <div className="text-4xl lg:text-5xl font-bold bg-gradient-to-br from-primary to-accent bg-clip-text text-transparent">100%</div>
+                    <div className="text-sm font-medium text-slate-600 mt-2">Client Satisfaction</div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Values Grid */}
+              <div ref={valuesRef} className="grid grid-cols-2 gap-4">
+                <div className="group flex items-center gap-3 p-5 rounded-xl bg-white/90 backdrop-blur-md hover:bg-white shadow-lg hover:shadow-xl transition-all duration-200 border border-white/20">
+                  <div className="flex-shrink-0 h-10 w-10 rounded-lg bg-gradient-to-br from-primary/20 to-primary/10 flex items-center justify-center group-hover:scale-110 transition-transform">
+                    <div className="h-2.5 w-2.5 rounded-full bg-primary" />
+                  </div>
+                  <span className="text-sm font-semibold text-slate-800">Evidence-based</span>
+                </div>
+                <div className="group flex items-center gap-3 p-5 rounded-xl bg-white/90 backdrop-blur-md hover:bg-white shadow-lg hover:shadow-xl transition-all duration-200 border border-white/20">
+                  <div className="flex-shrink-0 h-10 w-10 rounded-lg bg-gradient-to-br from-accent/20 to-accent/10 flex items-center justify-center group-hover:scale-110 transition-transform">
+                    <div className="h-2.5 w-2.5 rounded-full bg-accent" />
+                  </div>
+                  <span className="text-sm font-semibold text-slate-800">Context-driven</span>
+                </div>
+                <div className="group flex items-center gap-3 p-5 rounded-xl bg-white/90 backdrop-blur-md hover:bg-white shadow-lg hover:shadow-xl transition-all duration-200 border border-white/20">
+                  <div className="flex-shrink-0 h-10 w-10 rounded-lg bg-gradient-to-br from-primary/20 to-primary/10 flex items-center justify-center group-hover:scale-110 transition-transform">
+                    <div className="h-2.5 w-2.5 rounded-full bg-primary" />
+                  </div>
+                  <span className="text-sm font-semibold text-slate-800">Integrity</span>
+                </div>
+                <div className="group flex items-center gap-3 p-5 rounded-xl bg-white/90 backdrop-blur-md hover:bg-white shadow-lg hover:shadow-xl transition-all duration-200 border border-white/20">
+                  <div className="flex-shrink-0 h-10 w-10 rounded-lg bg-gradient-to-br from-accent/20 to-accent/10 flex items-center justify-center group-hover:scale-110 transition-transform">
+                    <div className="h-2.5 w-2.5 rounded-full bg-accent" />
+                  </div>
+                  <span className="text-sm font-semibold text-slate-800">Innovation</span>
                 </div>
               </div>
             </div>

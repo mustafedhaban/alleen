@@ -27,7 +27,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
               A
             </div>
             <span className="font-bold text-slate-900 text-lg group-hover:text-primary transition-colors">Alleen Consultant</span> */}
-            <img src="/logo.png" alt="Alleen Consultant" className="h-10 w-auto rounded-lg" />
+            <img src="/logo.png" alt="Alleen Consultant" className="h-8 w-auto" />
           </a>
           
           {/* Desktop Navigation */}

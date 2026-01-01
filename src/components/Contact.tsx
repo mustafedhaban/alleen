@@ -1,6 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import { Section } from './Section'
 import { Heading } from './Heading'
+import gsap from 'gsap'
+import { useGSAP } from '@gsap/react'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+gsap.registerPlugin(ScrollTrigger)
 
 type FormState = {
   name: string
@@ -14,6 +19,51 @@ export function Contact() {
   const [submitted, setSubmitted] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [focusedField, setFocusedField] = useState<string | null>(null)
+
+  const containerRef = useRef<HTMLDivElement>(null)
+  const headingRef = useRef<HTMLDivElement>(null)
+  const formRef = useRef<HTMLDivElement>(null)
+  const sidebarRef = useRef<HTMLDivElement>(null)
+
+  useGSAP(() => {
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: containerRef.current,
+        start: 'top 80%',
+        toggleActions: 'play none none none',
+      }
+    })
+
+    tl.fromTo(headingRef.current, {
+      y: 30,
+      opacity: 0
+    }, {
+      y: 0,
+      opacity: 1,
+      duration: 0.6,
+      ease: 'power3.out'
+    })
+    .fromTo(formRef.current, {
+      x: -30,
+      opacity: 0
+    }, {
+      x: 0,
+      opacity: 1,
+      duration: 0.6,
+      ease: 'power3.out'
+    }, '-=0.3')
+    .fromTo(sidebarRef.current ? sidebarRef.current.children : [], {
+      x: 30,
+      opacity: 0
+    }, {
+      x: 0,
+      opacity: 1,
+      duration: 0.6,
+      stagger: 0.2,
+      ease: 'power3.out'
+    }, '-=0.5')
+
+  }, { scope: containerRef })
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
@@ -34,14 +84,16 @@ export function Contact() {
 
   return (
     <Section id="contact" className="py-20 sm:py-24">
-      <Heading 
-        title="Partner With Us" 
-        subtitle="Tell us about your goals. We'll respond promptly." 
-        align="center" 
-      />
-      <div className="mt-14 grid lg:grid-cols-3 gap-8">
-        <div className="lg:col-span-2">
-          <div className="card bg-gradient-to-br from-white to-slate-50/50">
+      <div ref={containerRef}>
+        <Heading 
+          ref={headingRef}
+          title="Partner With Us" 
+          subtitle="Tell us about your goals. We'll respond promptly." 
+          align="center" 
+        />
+        <div className="mt-14 grid lg:grid-cols-3 gap-8">
+          <div ref={formRef} className="lg:col-span-2">
+            <div className="card bg-gradient-to-br from-white to-slate-50/50">
             <div className="card-body">
               {submitted ? (
                 <div className="text-center py-12 space-y-4">
@@ -199,7 +251,7 @@ export function Contact() {
         </div>
         
         {/* Contact Info Sidebar */}
-        <div className="space-y-6">
+        <div ref={sidebarRef} className="space-y-6">
           <div className="card bg-gradient-to-br from-primary to-primary/80 text-white">
             <div className="card-body">
               <h3 className="text-lg font-bold mb-4">Contact Information</h3>
@@ -244,6 +296,7 @@ export function Contact() {
             </div>
           </div>
         </div>
+      </div>
       </div>
     </Section>
   )

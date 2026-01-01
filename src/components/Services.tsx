@@ -1,7 +1,12 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { Section } from './Section'
 import { Heading } from './Heading'
 import { services } from '../data/services'
+import gsap from 'gsap'
+import { useGSAP } from '@gsap/react'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+gsap.registerPlugin(ScrollTrigger)
 
 const icons = [
   // Strategic Communication & Digital Advocacy
@@ -27,47 +32,85 @@ const icons = [
 ]
 
 export function Services() {
+  const containerRef = useRef<HTMLDivElement>(null)
+  const headingRef = useRef<HTMLDivElement>(null)
+  const gridRef = useRef<HTMLDivElement>(null)
+
+  useGSAP(() => {
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: containerRef.current,
+        start: 'top 80%',
+        toggleActions: 'play none none none',
+      }
+    })
+
+    tl.fromTo(headingRef.current, {
+      y: 30,
+      opacity: 0
+    }, {
+      y: 0,
+      opacity: 1,
+      duration: 0.6,
+      ease: 'power3.out'
+    })
+    .fromTo(gridRef.current ? gridRef.current.children : [], {
+      y: 30,
+      opacity: 0
+    }, {
+      y: 0,
+      opacity: 1,
+      duration: 0.6,
+      stagger: 0.1,
+      ease: 'power3.out'
+    }, '-=0.3')
+
+  }, { scope: containerRef })
+
   return (
     <Section id="services" className="py-20 sm:py-24">
-      <Heading 
-        title="Core Services" 
-        subtitle="Five service pillars designed to deliver measurable, sustainable impact." 
-        align="center" 
-      />
-      <div className="mt-14 grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-        {services.map((s, index) => (
-          <div 
-            key={s.title} 
-            className="group card bg-gradient-to-br from-white to-slate-50/50"
-          >
-            <div className="card-body">
-              {/* Icon */}
-              <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-br from-primary to-primary/90 text-white shadow-lg group-hover:shadow-glow transition-all duration-300 mb-4">
-                {icons[index]}
+      <div ref={containerRef}>
+        <Heading 
+          ref={headingRef}
+          title="Core Services" 
+          subtitle="Five service pillars designed to deliver measurable, sustainable impact." 
+          align="center" 
+        />
+        <div ref={gridRef} className="mt-14 grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+          {services.map((s, index) => (
+            <div 
+              key={s.title} 
+              className="group card bg-gradient-to-br from-white to-slate-50/50"
+            >
+              <div className="card-body">
+                {/* Icon */}
+                <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-br from-primary to-primary/90 text-white shadow-lg group-hover:shadow-glow transition-all duration-300 mb-4">
+                  {icons[index]}
+                </div>
+                
+                {/* Title */}
+                <h3 className="text-lg font-bold text-slate-900 mb-3 group-hover:text-primary transition-colors">
+                  {s.title}
+                </h3>
+                
+                {/* Description */}
+                <p className="text-slate-700 text-sm leading-relaxed mb-4">{s.description}</p>
+                
+                {/* Bullets */}
+                <ul className="space-y-2.5">
+                  {s.bullets.map((b) => (
+                    <li key={b} className="flex items-start gap-3 text-sm">
+                      <svg className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                      </svg>
+                      <span className="text-slate-700">{b}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
-              
-              {/* Title */}
-              <h3 className="text-lg font-bold text-slate-900 mb-3 group-hover:text-primary transition-colors">
-                {s.title}
-              </h3>
-              
-              {/* Description */}
-              <p className="text-slate-700 text-sm leading-relaxed mb-4">{s.description}</p>
-              
-              {/* Bullets */}
-              <ul className="space-y-2.5">
-                {s.bullets.map((b) => (
-                  <li key={b} className="flex items-start gap-3 text-sm">
-                    <svg className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                    </svg>
-                    <span className="text-slate-700">{b}</span>
-                  </li>
-                ))}
-              </ul>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </Section>
   )

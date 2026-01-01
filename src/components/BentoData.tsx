@@ -1,5 +1,11 @@
 import { BentoGrid, BentoGridItem } from "@/components/bento-grid";
 import { sectors } from "../data/sectors";
+import React, { useRef } from 'react';
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function BentoData() {
   const sectorImages: Record<string, string> = {
@@ -28,15 +34,50 @@ export default function BentoData() {
     className: (i === 0 || i === 4) ? "md:col-span-2" : "md:col-span-1",
   }))
 
+  const containerRef = useRef<HTMLDivElement>(null);
+  const headingRef = useRef<HTMLDivElement>(null);
+  const gridRef = useRef<HTMLDivElement>(null);
+
+  useGSAP(() => {
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: containerRef.current,
+        start: 'top 80%',
+        toggleActions: 'play none none none',
+      }
+    });
+
+    tl.fromTo(headingRef.current, {
+      y: 30,
+      opacity: 0
+    }, {
+      y: 0,
+      opacity: 1,
+      duration: 0.6,
+      ease: 'power3.out'
+    })
+    .fromTo(gridRef.current ? gridRef.current.children : [], {
+      y: 30,
+      opacity: 0
+    }, {
+      y: 0,
+      opacity: 1,
+      duration: 0.6,
+      stagger: 0.1,
+      ease: 'power3.out'
+    }, '-=0.3');
+
+  }, { scope: containerRef });
+
   return (
-    <div id="sectors-bento" className="container mt-12 mx-auto items-center py-20 sm:py-24">
-        <div className="text-center mb-12">
+    <div ref={containerRef} id="sectors-bento" className="container mt-12 mx-auto items-center py-20 sm:py-24">
+        <div ref={headingRef} className="text-center mb-12">
             <h2 className="text-3xl font-bold text-gray-900">Sectors of Expertise</h2>
             <p className="mt-2 text-lg text-gray-600">
                 We work with a diverse range of sectors to deliver tailored solutions.
             </p>
         </div>
-      <BentoGrid className="md:grid-cols-4">
+      <BentoGrid ref={gridRef} className="md:grid-cols-4">
         {items.map((item, i) => (
           <BentoGridItem
             key={i}
