@@ -83,8 +83,7 @@ export function About() {
             Who We Are
           </h1>
           <p ref={textRef} className="text-slate-600 mb-8 max-w-xl lg:text-xl">
-            Alleen Consultant empowers organizations across the Somali Region with evidence-based strategies,
-            organizational strengthening, and contextual expertise for sustainable social impact.
+            Alleen Consultancy is a dynamic consultancy firm that blends strategic thinking, innovation, and tailored solutions to drive social impact and business growth.
           </p>
           <div ref={buttonsRef} className="flex w-full flex-col justify-center gap-2 sm:flex-row lg:justify-start">
           
