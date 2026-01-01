@@ -70,7 +70,7 @@ export function Hero() {
               {/* Badge */}
               <div className="flex justify-center lg:justify-start">
                 <div ref={badgeRef} className="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full bg-white/95 backdrop-blur-md text-primary text-sm font-semibold shadow-lg border border-primary/10">
-                  <IconSparkles className="h-4 w-4" />
+                  <IconSparkles className="h-4 w-4 text-secondary" />
                   Progress, Partnership, and Positive resultes  
                 </div>
               </div>
@@ -79,7 +79,7 @@ export function Hero() {
               <div className="space-y-6">
                 <h1 ref={titleRef} className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-white leading-[1.1]">
                   Consulting for{' '}
-                  <span className="block mt-2 bg-gradient-to-r from-accent via-primary to-accent bg-clip-text text-transparent animate-gradient">
+                  <span className="block mt-2 bg-gradient-to-r from-accent via-secondary to-accent bg-clip-text text-transparent animate-gradient">
                      Community Impact
                   </span>
                 </h1>
