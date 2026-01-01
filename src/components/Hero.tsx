@@ -106,57 +106,8 @@ export function Hero() {
                 </a>
               </div>
             </div>
-
-            {/* Right Column - Stats & Values */}
-            <div className="space-y-6">
-              {/* Stats Card */}
-              <div ref={statsRef} className="bg-white/95 backdrop-blur-md rounded-2xl p-8 shadow-2xl border border-white/20">
-                <div className="grid grid-cols-3 gap-8">
-                  <div className="text-center">
-                    <div className="text-4xl lg:text-5xl font-bold bg-gradient-to-br from-primary to-accent bg-clip-text text-transparent">50+</div>
-                    <div className="text-sm font-medium text-slate-600 mt-2">Projects Delivered</div>
-                  </div>
-                  <div className="text-center border-x border-slate-200">
-                    <div className="text-4xl lg:text-5xl font-bold bg-gradient-to-br from-primary to-accent bg-clip-text text-transparent">8</div>
-                    <div className="text-sm font-medium text-slate-600 mt-2">Sectors Covered</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-4xl lg:text-5xl font-bold bg-gradient-to-br from-primary to-accent bg-clip-text text-transparent">100%</div>
-                    <div className="text-sm font-medium text-slate-600 mt-2">Client Satisfaction</div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Values Grid */}
-              <div ref={valuesRef} className="grid grid-cols-2 gap-4">
-                <div className="group flex items-center gap-3 p-5 rounded-xl bg-white/90 backdrop-blur-md hover:bg-white shadow-lg hover:shadow-xl transition-all duration-200 border border-white/20">
-                  <div className="flex-shrink-0 h-10 w-10 rounded-lg bg-gradient-to-br from-primary/20 to-primary/10 flex items-center justify-center group-hover:scale-110 transition-transform">
-                    <div className="h-2.5 w-2.5 rounded-full bg-primary" />
-                  </div>
-                  <span className="text-sm font-semibold text-slate-800">Evidence-based</span>
-                </div>
-                <div className="group flex items-center gap-3 p-5 rounded-xl bg-white/90 backdrop-blur-md hover:bg-white shadow-lg hover:shadow-xl transition-all duration-200 border border-white/20">
-                  <div className="flex-shrink-0 h-10 w-10 rounded-lg bg-gradient-to-br from-accent/20 to-accent/10 flex items-center justify-center group-hover:scale-110 transition-transform">
-                    <div className="h-2.5 w-2.5 rounded-full bg-accent" />
-                  </div>
-                  <span className="text-sm font-semibold text-slate-800">Context-driven</span>
-                </div>
-                <div className="group flex items-center gap-3 p-5 rounded-xl bg-white/90 backdrop-blur-md hover:bg-white shadow-lg hover:shadow-xl transition-all duration-200 border border-white/20">
-                  <div className="flex-shrink-0 h-10 w-10 rounded-lg bg-gradient-to-br from-primary/20 to-primary/10 flex items-center justify-center group-hover:scale-110 transition-transform">
-                    <div className="h-2.5 w-2.5 rounded-full bg-primary" />
-                  </div>
-                  <span className="text-sm font-semibold text-slate-800">Integrity</span>
-                </div>
-                <div className="group flex items-center gap-3 p-5 rounded-xl bg-white/90 backdrop-blur-md hover:bg-white shadow-lg hover:shadow-xl transition-all duration-200 border border-white/20">
-                  <div className="flex-shrink-0 h-10 w-10 rounded-lg bg-gradient-to-br from-accent/20 to-accent/10 flex items-center justify-center group-hover:scale-110 transition-transform">
-                    <div className="h-2.5 w-2.5 rounded-full bg-accent" />
-                  </div>
-                  <span className="text-sm font-semibold text-slate-800">Innovation</span>
-                </div>
-              </div>
             </div>
           </div>
-        </div>
       </Section>
     </div>
   )
