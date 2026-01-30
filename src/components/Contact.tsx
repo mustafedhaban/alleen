@@ -70,17 +70,45 @@ export function Contact() {
     setForm((f) => ({ ...f, [name]: value }))
   }
 
-  const onSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    if (!form.name || !form.email || !form.message) return
-    
-    setIsSubmitting(true)
-    // Simulate API call
-    setTimeout(() => {
-      setIsSubmitting(false)
+
+  const onSubmit = async (e: React.FormEvent) => {
+  e.preventDefault()
+  if (!form.name || !form.email || !form.message) return
+
+  setIsSubmitting(true)
+
+  try {
+    const formData = new FormData()
+    formData.append("name", form.name)
+    formData.append("organization", form.organization)
+    formData.append("email", form.email)
+    formData.append("message", form.message)
+
+    const res = await fetch("/contact.php", {
+      method: "POST",
+      body: formData,
+    })
+
+    const contentType = res.headers.get("content-type");
+    if (!contentType || !contentType.includes("application/json")) {
+      throw new Error("Received non-JSON response from server");
+    }
+
+    const data = await res.json()
+
+    if (data.success) {
       setSubmitted(true)
-    }, 1000)
+      setForm({ name: "", organization: "", email: "", message: "" })
+    } else {
+      alert("Failed to send message. Please try again.")
+    }
+  } catch (err) {
+    alert("Network error. Please try later.")
+  } finally {
+    setIsSubmitting(false)
   }
+}
+
 
   return (
     <Section id="contact" className="py-20 sm:py-24">
@@ -264,7 +292,7 @@ export function Contact() {
                   <div>
                     <p className="text-sm font-medium opacity-90">Email</p>
                     <a href="mailto:info@alleenconsultant.org" className="text-white hover:text-white/80 transition-colors">
-                      info@alleenconsultant.org
+                      info@alleenconsultancy.com
                     </a>
                   </div>
                 </div>
@@ -276,7 +304,7 @@ export function Contact() {
                   </svg>
                   <div>
                     <p className="text-sm font-medium opacity-90">Region</p>
-                    <p>Somalia & Somali Region</p>
+                    <p>Somali Region</p>
                   </div>
                 </div>
               </div>

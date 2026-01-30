@@ -3,6 +3,12 @@ import react from '@vitejs/plugin-react'
 import path from 'path'
 
 export default defineConfig({
+  base: './',
+  build: {
+    sourcemap: false,
+    chunkSizeWarningLimit: 1000,
+
+  },
   plugins: [react()],
   resolve: {
     alias: {
