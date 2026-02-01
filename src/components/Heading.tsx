@@ -1,13 +1,21 @@
 import React, { forwardRef } from 'react'
 
-export const Heading = forwardRef<HTMLDivElement, { title: string, subtitle?: string, align?: 'left' | 'center' }>(
-  ({ title, subtitle, align = 'left' }, ref) => {
+interface HeadingProps {
+  title: string
+  subtitle?: string
+  align?: 'left' | 'center'
+  className?: string
+}
+
+export const Heading = forwardRef<HTMLDivElement, HeadingProps>(
+  ({ title, subtitle, align = 'center', className = '' }, ref) => {
+    const alignClass = align === 'left' ? 'text-left' : 'text-center'
+    const mxClass = align === 'left' ? '' : 'mx-auto'
+    
     return (
-      <div ref={ref} className={align === 'center' ? 'text-center max-w-3xl mx-auto' : ''}>
+      <div ref={ref} className={`${alignClass} max-w-3xl ${mxClass} ${className}`}>
         <h2 className="section-title">{title}</h2>
-        {subtitle && (
-          <p className="section-subtitle">{subtitle}</p>
-        )}
+        {subtitle && <p className="section-subtitle">{subtitle}</p>}
       </div>
     )
   }

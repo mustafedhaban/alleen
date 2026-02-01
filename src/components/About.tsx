@@ -99,15 +99,17 @@ export function About() {
             </Button>
           </div>
         </div>
-        <img
-          ref={imageRef}
-          src="/aboutus.png"
-          alt="Alleen Consultant"
-          width="900"
-          height="384"
-          loading="lazy"
-          className="max-h-96 w-full rounded-md object-cover"
-        />
+        <picture>
+          <source srcSet="/aboutus.png" type="image/webp" />
+          <img
+            src="/aboutus.png"
+            alt="Alleen Consultant"
+            width="900"
+            height="384"
+            loading="lazy"
+            className="max-h-96 w-full rounded-md object-cover"
+          />
+        </picture>
       </div>
     </Section>
   )

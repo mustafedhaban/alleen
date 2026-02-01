@@ -54,60 +54,55 @@ export function Hero() {
   return (
     <div
       ref={containerRef}
-      className="relative overflow-hidden w-screen bg-cover bg-center min-h-screen flex items-center"
-      style={{ backgroundImage: "url('/hero2.jpg')" }}
+      className="relative w-full min-h-screen flex items-center overflow-hidden"
     >
-      {/* Enhanced overlay layers */}
-      <div className="absolute inset-0 bg-gradient-to-br from-slate-900/60 via-slate-900/40 to-primary/30" aria-hidden="true" />
-      <div className="absolute inset-0 bg-hero-texture" aria-hidden="true" />
-      <div className="absolute inset-0 bg-grid-primary/5 [mask-image:linear-gradient(0deg,transparent,white,transparent)]" aria-hidden="true" />
+      {/* Optimized Background Image with WebP support */}
+      <picture className="absolute inset-0 w-full h-full">
+        <source srcSet="/hero2.jpg" type="image/webp" />
+        <img 
+          src="/hero2.jpg" 
+          alt="" 
+          className="absolute inset-0 w-full h-full object-cover"
+          loading="eager"
+        />
+      </picture>
       
-      <Section>
-        <div className="relative mx-auto max-w-7xl py-24 sm:py-32 lg:py-40">
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-            {/* Left Column - Main Content */}
-            <div className="space-y-8 text-center lg:text-left">
-              {/* Badge */}
-              <div className="flex justify-center lg:justify-start">
-                <div ref={badgeRef} className="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full bg-white/95 backdrop-blur-md text-primary text-sm font-semibold shadow-lg border border-primary/10">
-                  <IconSparkles className="h-4 w-4 text-secondary" />
-                  Progress, Partnership, and Positive resultes  
-                </div>
-              </div>
-
-              {/* Main Heading */}
-              <div className="space-y-6">
-                <h1 ref={titleRef} className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-white leading-[1.1]">
-                  Consulting for{' '}
-                  <span className="block mt-2 bg-gradient-to-r from-accent via-secondary to-accent bg-clip-text text-transparent animate-gradient">
-                     Community Impact
-                  </span>
-                </h1>
-                
-                <p ref={textRef} className="text-lg sm:text-xl text-slate-100 leading-relaxed max-w-2xl mx-auto lg:mx-0">
-                  Empowering NGOs, government entities, and socially-conscious businesses with evidence-based strategies and data-driven solutions for sustainable social impact in the Somali Region.
-                </p>
-              </div>
-
-              {/* CTA Buttons */}
-              <div ref={buttonsRef} className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                <a 
-                  href="#contact" 
-                  className="group inline-flex items-center justify-center gap-2 px-8 py-4 bg-primary hover:bg-primary/90 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105"
-                >
-                  Get in Touch
-                  <IconArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
-                </a>
-                <a 
-                  href="#services" 
-                  className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white/95 backdrop-blur-md hover:bg-white text-slate-900 font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105"
-                >
-                  Our Services
-                </a>
-              </div>
+      {/* Blue Overlay - Matching the screenshot style */}
+      <div className="absolute inset-0 bg-[#33499D]/2 mix-blend-multiply" aria-hidden="true" />
+      <div className="absolute inset-0 bg-gradient-to-r from-slate-900/80 to-slate-900/40" aria-hidden="true" />
+      
+      <Section className="relative z-10 w-full">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8 py-24 sm:py-32">
+          <div className="max-w-2xl">
+            {/* Small Bold Tagline */}
+            <div ref={badgeRef} className="mb-6">
+              <span className="font-bold text-white tracking-wide text-sm sm:text-base uppercase opacity-90">
+                Progress, Partnership, and Positive Results
+              </span>
             </div>
+
+            {/* Main Heading */}
+            <h1 ref={titleRef} className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-white mb-6 leading-tight">
+              Consulting for <br />
+              Community Impact
+            </h1>
+            
+            {/* Subtext */}
+            <p ref={textRef} className="text-lg sm:text-xl text-slate-100 leading-relaxed mb-10 opacity-90 max-w-xl">
+              Empowering NGOs, government entities, and socially-conscious businesses with evidence-based strategies and data-driven solutions for sustainable social impact in the Somali Region.
+            </p>
+
+            {/* CTA Button */}
+            <div ref={buttonsRef}>
+              <a 
+                href="#contact" 
+                className="inline-flex items-center justify-center px-8 py-4 bg-[#5D7CF2] hover:bg-[#4B69E0] text-white font-bold rounded shadow-lg transition-all duration-200 transform hover:-translate-y-1 uppercase tracking-wider text-sm"
+              >
+                Get in Touch
+              </a>
             </div>
           </div>
+        </div>
       </Section>
     </div>
   )

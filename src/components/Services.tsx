@@ -1,12 +1,7 @@
-import React, { useRef } from 'react'
+import React from 'react'
 import { Section } from './Section'
-import { Heading } from './Heading'
 import { services } from '../data/services'
-import gsap from 'gsap'
-import { useGSAP } from '@gsap/react'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
-
-gsap.registerPlugin(ScrollTrigger)
+import { useScrollAnimation, useStaggerAnimation } from '../hooks/useScrollAnimation'
 
 const icons = [
   // Strategic Communication & Digital Advocacy
@@ -31,51 +26,17 @@ const icons = [
   </svg>,
 ]
 
-export function Services() {
-  const containerRef = useRef<HTMLDivElement>(null)
-  const headingRef = useRef<HTMLDivElement>(null)
-  const gridRef = useRef<HTMLDivElement>(null)
-
-  useGSAP(() => {
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: containerRef.current,
-        start: 'top 80%',
-        toggleActions: 'play none none none',
-      }
-    })
-
-    tl.fromTo(headingRef.current, {
-      y: 30,
-      opacity: 0
-    }, {
-      y: 0,
-      opacity: 1,
-      duration: 0.6,
-      ease: 'power3.out'
-    })
-    .fromTo(gridRef.current ? gridRef.current.children : [], {
-      y: 30,
-      opacity: 0
-    }, {
-      y: 0,
-      opacity: 1,
-      duration: 0.6,
-      stagger: 0.1,
-      ease: 'power3.out'
-    }, '-=0.3')
-
-  }, { scope: containerRef })
+export const Services = React.memo(function Services() {
+  const headingRef = useScrollAnimation<HTMLDivElement>()
+  const gridRef = useStaggerAnimation<HTMLDivElement>(100)
 
   return (
-    <Section id="services" className="py-20 sm:py-24">
-      <div ref={containerRef}>
-        <Heading 
-          ref={headingRef}
-          title="Core Services" 
-          subtitle="Five service pillars designed to deliver measurable, sustainable impact." 
-          align="center" 
-        />
+    <Section id="services" className="bg-primary/10 py-20 sm:py-24">
+      <div>
+        <div ref={headingRef} className="text-center max-w-3xl mx-auto">
+          <h2 className="section-title">Core Services</h2>
+          <p className="section-subtitle">Five service pillars designed to deliver measurable, sustainable impact.</p>
+        </div>
         <div ref={gridRef} className="mt-14 grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
           {services.map((s, index) => (
             <div 
@@ -114,4 +75,4 @@ export function Services() {
       </div>
     </Section>
   )
-}
+})

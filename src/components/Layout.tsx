@@ -17,29 +17,49 @@ export function Layout({ children }: { children: React.ReactNode }) {
   return (
     <div className="min-h-screen bg-slate-50">
       <header 
-        className={`sticky top-0 z-50 bg-white/90 backdrop-blur-lg border-b transition-all duration-300 ${
-          scrolled ? 'border-slate-300 shadow-md' : 'border-slate-200'
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+          scrolled 
+            ? 'bg-white/95 backdrop-blur-md shadow-sm py-3' 
+            : 'bg-transparent py-6'
         }`}
       >
-        <div className="container-default py-4 flex items-center justify-between">
+        <div className="container-default flex items-center justify-between px-6 lg:px-8">
           <a href="#" className="flex items-center gap-3 group">
-            {/* <div className="h-10 w-10 rounded-lg bg-gradient-to-br from-primary to-primary/80 grid place-items-center text-white font-bold shadow-md group-hover:shadow-glow transition-all duration-300">
-              A
-            </div>
-            <span className="font-bold text-slate-900 text-lg group-hover:text-primary transition-colors">Alleen Consultant</span> */}
-            <img src="/logo.png" alt="Alleen Consultant" className="h-8 w-auto" />
+            <img 
+              src="/logo.png" 
+              alt="Alleen Consultant" 
+              className={`h-8 w-auto transition-all duration-300 ${scrolled ? '' : 'brightness-0 invert'}`} 
+            /> 
           </a>
           
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-slate-700">
-            <a href="#services" className="hover:text-primary transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-primary after:transition-all hover:after:w-full">Services</a>
-            <a href="#sectors-bento" className="hover:text-primary transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-primary after:transition-all hover:after:w-full">Sectors</a>
-            <a href="#approach" className="hover:text-primary transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-primary after:transition-all hover:after:w-full">Approach</a>
-            <a href="#contact" className="hover:text-primary transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-primary after:transition-all hover:after:w-full">Contact</a>
+          <nav className="hidden md:flex items-center gap-8 text-sm font-medium ml-auto mr-8">
+            {['Home', 'About', 'Services', 'Contact'].map((item) => (
+              <a 
+                key={item}
+                href={`#${item.toLowerCase()}`} 
+                className={`transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:transition-all hover:after:w-full ${
+                  scrolled 
+                    ? 'text-slate-700 hover:text-[#33499D] after:bg-[#33499D]' 
+                    : 'text-white/90 hover:text-white after:bg-white'
+                }`}
+              >
+                {item}
+              </a>
+            ))}
           </nav>
           
           <div className="flex items-center gap-3">
-            <a href="#contact" className="btn-primary px-5 py-2.5 hidden sm:inline-flex">Get in Touch</a>
+            <a 
+              href="#contact" 
+              className={`px-6 py-2.5 rounded font-semibold text-sm transition-all duration-300 shadow-lg ${
+                scrolled
+                  ? 'bg-[#5D7CF2] text-white hover:bg-[#4B69E0]'
+                  : 'bg-[#5D7CF2] text-white hover:bg-[#4B69E0]'
+              }`}
+            >
+              REQUEST QUOTE
+            </a>
             
             {/* Mobile Menu Button */}
             <button 
@@ -60,13 +80,25 @@ export function Layout({ children }: { children: React.ReactNode }) {
         
         {/* Mobile Menu */}
         {mobileMenuOpen && (
-          <div className="md:hidden border-t border-slate-200 bg-white/95 backdrop-blur-lg">
-            <nav className="container-default py-4 flex flex-col gap-3">
-              <a href="#services" onClick={() => setMobileMenuOpen(false)} className="py-2 px-4 hover:bg-primary/5 rounded-lg transition-colors font-medium">Services</a>
-              <a href="#sectors-bento" onClick={() => setMobileMenuOpen(false)} className="py-2 px-4 hover:bg-primary/5 rounded-lg transition-colors font-medium">Sectors</a>
-              <a href="#approach" onClick={() => setMobileMenuOpen(false)} className="py-2 px-4 hover:bg-primary/5 rounded-lg transition-colors font-medium">Approach</a>
-              <a href="#contact" onClick={() => setMobileMenuOpen(false)} className="py-2 px-4 hover:bg-primary/5 rounded-lg transition-colors font-medium">Contact</a>
-              <a href="#contact" onClick={() => setMobileMenuOpen(false)} className="btn-primary px-5 py-2.5 mt-2">Get in Touch</a>
+          <div className="md:hidden absolute top-full left-0 w-full bg-white border-t border-slate-100 shadow-xl">
+            <nav className="container-default py-4 flex flex-col gap-2 p-4">
+              {['Home', 'About', 'Services', 'Contact'].map((item) => (
+                <a 
+                  key={item}
+                  href={`#${item.toLowerCase()}`} 
+                  onClick={() => setMobileMenuOpen(false)} 
+                  className="py-2.5 px-4 hover:bg-slate-50 rounded-lg text-slate-700 font-medium transition-colors"
+                >
+                  {item}
+                </a>
+              ))}
+              <a 
+                href="#contact" 
+                onClick={() => setMobileMenuOpen(false)} 
+                className="mt-2 text-center py-3 bg-[#5D7CF2] text-white rounded-lg font-semibold hover:bg-[#4B69E0] transition-colors uppercase tracking-wide text-sm"
+              >
+                Request Quote
+              </a>
             </nav>
           </div>
         )}

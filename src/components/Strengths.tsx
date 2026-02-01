@@ -1,6 +1,5 @@
 import React, { useRef } from 'react'
 import { Section } from './Section'
-import { Heading } from './Heading'
 import { strengths } from '../data/strengths'
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
@@ -47,12 +46,10 @@ export function Strengths() {
   return (
     <Section className="py-20 sm:py-24 bg-gradient-to-br from-white to-primary/10">
       <div ref={containerRef}>
-        <Heading 
-          ref={headingRef}
-          title="Key Strengths" 
-          subtitle="Distinct capabilities that drive quality and results." 
-          align="center" 
-        />
+        <div ref={headingRef} className="text-center max-w-3xl mx-auto">
+          <h2 className="section-title">Key Strengths</h2>
+          <p className="section-subtitle">Distinct capabilities that drive quality and results.</p>
+        </div>
         <div ref={gridRef} className="mt-14 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {strengths.map((s) => (
             <div key={s} className="group card bg-white hover:shadow-soft-lg transition-all">
