@@ -19,14 +19,14 @@ gsap.registerPlugin(ScrollTrigger)
 
 export default function BentoData() {
   const sectorImages: Record<string, string> = {
-    'Health & Nutrition': '/nutrition.jpg',
-    'Education': '/education.jpg',
-    'Livelihoods & Economic Empowerment': '/20892261_Sandy_Ppl-31_Single-01.jpg',
-    'Gender Equality & Social Inclusion (GESI)': '/gender%20equality.jpg',
-    'Climate Change & Environment': '/climate_change.jpg',
-    'Governance & Human Rights': '/govering_and_human_rights.jpg',
-    'Child Protection': '/childprotection.jpg',
-    'WASH': '/wash.jpg',
+    'Health & Nutrition': '/nutrition.webp',
+    'Education': '/education.webp',
+    'Livelihoods & Economic Empowerment': '/20892261_Sandy_Ppl-31_Single-01.webp',
+    'Gender Equality & Social Inclusion (GESI)': '/gender%20equality.webp',
+    'Climate Change & Environment': '/climate_change.webp',
+    'Governance & Human Rights': '/govering_and_human_rights.webp',
+    'Child Protection': '/childprotection.webp',
+    'WASH': '/wash.webp',
   }
 
   const containerRef = useRef<HTMLDivElement>(null)

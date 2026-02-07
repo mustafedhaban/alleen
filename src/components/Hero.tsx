@@ -58,9 +58,9 @@ export function Hero() {
     >
       {/* Optimized Background Image with WebP support */}
       <picture className="absolute inset-0 w-full h-full">
-        <source srcSet="/hero2.jpg" type="image/webp" />
+        <source srcSet="/hero.webp" type="image/webp" />
         <img 
-          src="/hero2.jpg" 
+          src="/hero.webp" 
           alt="" 
           className="absolute inset-0 w-full h-full object-cover"
           loading="eager"
