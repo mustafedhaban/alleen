@@ -2,7 +2,7 @@
 
 import React, { useState, useRef } from 'react'
 import { Section } from './Section'
-import { Heading } from './Heading'
+// import { services } from '../data/services'
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
@@ -123,26 +123,57 @@ export function Contact() {
 
 
   return (
-    <Section id="contact" className="py-20 sm:py-24">
+    <Section id="contact" className="py-16 sm:py-20">
       <div ref={containerRef}>
-        <Heading 
-          ref={headingRef}
-          title="Partner With Us" 
-          subtitle="Tell us about your goals. We'll respond promptly." 
-          align="center" 
-        />
-        <div className="mt-14 grid lg:grid-cols-3 gap-8">
-          <div ref={formRef} className="lg:col-span-2">
-            <div className="card bg-gradient-to-br from-white to-slate-50/50">
-            <div className="card-body">
+        <div className="rounded-2xl ring-1 ring-slate-200 shadow-soft overflow-hidden grid lg:grid-cols-3">
+          <div className="bg-primary text-white p-8 sm:p-10">
+            <div ref={headingRef} className="space-y-4">
+              <h3 className="text-2xl sm:text-3xl font-bold">Partner With Us</h3>
+              <p className="text-white/90 text-sm leading-relaxed">
+                Tell us about your goals. We'll respond promptly.
+              </p>
+            </div>
+            <div className="mt-8 space-y-6">
+              <div className="flex items-start gap-3">
+                <svg className="w-5 h-5 text-white/90 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+                <div>
+                  <p className="text-xs uppercase tracking-wider opacity-80">Email</p>
+                  <a href="mailto:info@alleenconsultant.org" className="font-semibold text-white">
+                    info@alleenconsultancy.com
+                  </a>
+                </div>
+              </div>
+              <div className="flex items-start gap-3">
+                <svg className="w-5 h-5 text-white/90 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+                <div>
+                  <p className="text-xs uppercase tracking-wider opacity-80">Region</p>
+                  <p className="font-semibold text-white">Somali Region</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-3">
+                <svg className="w-5 h-5 text-white/90 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <p className="text-xs leading-relaxed text-white/90">
+                  <span className="font-semibold text-white">Response time:</span> We typically respond within 2 business days. Share your objectives and any relevant timelines or partners.
+                </p>
+              </div>
+            </div>
+            <div className="mt-10 flex items-center gap-3">
+              <a href="#" className="grid place-items-center w-8 h-8 rounded-full bg-white/10 text-white">in</a>
+              <a href="#" className="grid place-items-center w-8 h-8 rounded-full bg-white/10 text-white">x</a>
+            </div>
+          </div>
+          <div className="bg-white p-8 sm:p-10 lg:col-span-2">
+            <div ref={formRef}>
               {submitted ? (
-                <div className="text-center py-12 space-y-4">
-                  <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-green-100 to-green-200 mb-4">
-                    <svg className="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                    </svg>
-                  </div>
-                  <h3 className="text-2xl font-bold text-slate-900">Thank you for reaching out!</h3>
+                <div className="text-center py-10 space-y-4">
+                  <h3 className="text-xl font-semibold text-slate-900">Thank you for reaching out!</h3>
                   <p className="text-slate-600 max-w-md mx-auto">
                     We've received your message and will get back to you at <span className="font-semibold text-primary">{form.email}</span> within 2 business days.
                   </p>
@@ -151,7 +182,7 @@ export function Contact() {
                       setSubmitted(false)
                       setForm({ name: '', organization: '', email: '', message: '' })
                     }}
-                    className="btn-outline px-5 py-2.5 mt-4"
+                    className="btn-outline px-5 py-2.5 mt-2"
                   >
                     Send Another Message
                   </button>
@@ -159,113 +190,60 @@ export function Contact() {
               ) : (
                 <form onSubmit={onSubmit} className="space-y-6">
                   <div className="grid sm:grid-cols-2 gap-6">
-                    {/* Name Field */}
-                    <div className="relative">
-                      <label 
-                        htmlFor="name"
-                        className="block text-sm font-semibold text-slate-700 mb-2"
-                      >
-                        Full Name *
-                      </label>
-                      <input 
+                    <div>
+                      <label htmlFor="name" className="block text-sm font-medium text-slate-700 mb-2">Full Name *</label>
+                      <input
                         id="name"
-                        name="name" 
-                        value={form.name} 
+                        name="name"
+                        value={form.name}
                         onChange={onChange}
-                        onFocus={() => setFocusedField('name')}
-                        onBlur={() => setFocusedField(null)}
-                        required 
-                        className={`w-full rounded-lg border-2 bg-white px-4 py-3 text-sm transition-all focus:outline-none ${
-                          focusedField === 'name' 
-                            ? 'border-primary ring-4 ring-primary/10' 
-                            : 'border-slate-200 hover:border-slate-300'
-                        }`}
+                        required
+                        className="w-full rounded-md bg-slate-800 text-white placeholder:text-slate-400 border-0 ring-1 ring-slate-700 focus:ring-2 focus:ring-ring px-4 py-3 text-sm"
                         placeholder="John Doe"
                       />
                     </div>
-                    
-                    {/* Organization Field */}
-                    <div className="relative">
-                      <label 
-                        htmlFor="organization"
-                        className="block text-sm font-semibold text-slate-700 mb-2"
-                      >
-                        Organization
-                      </label>
-                      <input 
-                        id="organization"
-                        name="organization" 
-                        value={form.organization} 
+                    <div>
+                      <label htmlFor="email" className="block text-sm font-medium text-slate-700 mb-2">Email Address *</label>
+                      <input
+                        id="email"
+                        type="email"
+                        name="email"
+                        value={form.email}
                         onChange={onChange}
-                        onFocus={() => setFocusedField('organization')}
-                        onBlur={() => setFocusedField(null)}
-                        className={`w-full rounded-lg border-2 bg-white px-4 py-3 text-sm transition-all focus:outline-none ${
-                          focusedField === 'organization' 
-                            ? 'border-primary ring-4 ring-primary/10' 
-                            : 'border-slate-200 hover:border-slate-300'
-                        }`}
-                        placeholder="Your Organization"
+                        required
+                        className="w-full rounded-md bg-slate-800 text-white placeholder:text-slate-400 border-0 ring-1 ring-slate-700 focus:ring-2 focus:ring-ring px-4 py-3 text-sm"
+                        placeholder="john@example.com"
                       />
                     </div>
                   </div>
-                  
-                  {/* Email Field */}
-                  <div className="relative">
-                    <label 
-                      htmlFor="email"
-                      className="block text-sm font-semibold text-slate-700 mb-2"
-                    >
-                      Email Address *
-                    </label>
-                    <input 
-                      id="email"
-                      type="email" 
-                      name="email" 
-                      value={form.email} 
+                  <div>
+                    <label htmlFor="organization" className="block text-sm font-medium text-slate-700 mb-2">Organization</label>
+                    <input
+                      id="organization"
+                      name="organization"
+                      value={form.organization}
                       onChange={onChange}
-                      onFocus={() => setFocusedField('email')}
-                      onBlur={() => setFocusedField(null)}
-                      required 
-                      className={`w-full rounded-lg border-2 bg-white px-4 py-3 text-sm transition-all focus:outline-none ${
-                        focusedField === 'email' 
-                          ? 'border-primary ring-4 ring-primary/10' 
-                          : 'border-slate-200 hover:border-slate-300'
-                      }`}
-                      placeholder="john@example.com"
+                      className="w-full rounded-md bg-slate-800 text-white placeholder:text-slate-400 border-0 ring-1 ring-slate-700 focus:ring-2 focus:ring-ring px-4 py-3 text-sm"
+                      placeholder="Your Organization"
                     />
                   </div>
-                  
-                  {/* Message Field */}
-                  <div className="relative">
-                    <label 
-                      htmlFor="message"
-                      className="block text-sm font-semibold text-slate-700 mb-2"
-                    >
-                      Message *
-                    </label>
-                    <textarea 
+                  <div>
+                    <label htmlFor="message" className="block text-sm font-medium text-slate-700 mb-2">Message *</label>
+                    <textarea
                       id="message"
-                      name="message" 
-                      value={form.message} 
+                      name="message"
+                      value={form.message}
                       onChange={onChange}
-                      onFocus={() => setFocusedField('message')}
-                      onBlur={() => setFocusedField(null)}
-                      required 
+                      required
                       rows={5}
-                      className={`w-full rounded-lg border-2 bg-white px-4 py-3 text-sm transition-all focus:outline-none resize-none ${
-                        focusedField === 'message' 
-                          ? 'border-primary ring-4 ring-primary/10' 
-                          : 'border-slate-200 hover:border-slate-300'
-                      }`}
+                      className="w-full rounded-md bg-slate-800 text-white placeholder:text-slate-400 border-0 ring-1 ring-slate-700 focus:ring-2 focus:ring-ring px-4 py-3 text-sm resize-none"
                       placeholder="Tell us about your project, goals, and how we can help..."
                     />
                   </div>
-                  
-                  {/* Submit Button */}
-                  <button 
-                    type="submit" 
+                  <button
+                    type="submit"
                     disabled={isSubmitting}
-                    className="btn-primary px-6 py-3.5 text-base w-full sm:w-auto"
+                    className="w-full sm:w-auto inline-flex items-center justify-center px-6 py-3.5 rounded-md bg-accent text-white hover:bg-accent/90 transition-colors text-sm font-semibold"
                   >
                     {isSubmitting ? (
                       <>
@@ -278,7 +256,7 @@ export function Contact() {
                     ) : (
                       <>
                         Send Message
-                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                         </svg>
                       </>
@@ -289,54 +267,6 @@ export function Contact() {
             </div>
           </div>
         </div>
-        
-        {/* Contact Info Sidebar */}
-        <div ref={sidebarRef} className="space-y-6">
-          <div className="card bg-gradient-to-br from-primary to-primary/80 text-white">
-            <div className="card-body">
-              <h3 className="text-lg font-bold mb-4">Contact Information</h3>
-              
-              <div className="space-y-4">
-                <div className="flex items-start gap-3">
-                  <svg className="w-5 h-5 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                  </svg>
-                  <div>
-                    <p className="text-sm font-medium opacity-90">Email</p>
-                    <a href="mailto:info@alleenconsultant.org" className="text-white hover:text-white/80 transition-colors">
-                      info@alleenconsultancy.com
-                    </a>
-                  </div>
-                </div>
-                
-                <div className="flex items-start gap-3">
-                  <svg className="w-5 h-5 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                  </svg>
-                  <div>
-                    <p className="text-sm font-medium opacity-90">Region</p>
-                    <p>Somali Region</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          
-          <div className="card">
-            <div className="card-body">
-              <div className="flex items-start gap-3 text-sm text-slate-700">
-                <svg className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                <p className="leading-relaxed">
-                  <span className="font-semibold text-slate-900">Response time:</span> We typically respond within 2 business days. Share your objectives and any relevant timelines or partners.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
       </div>
     </Section>
   )

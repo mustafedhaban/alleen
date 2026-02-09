@@ -1,8 +1,9 @@
 import React, { useRef } from 'react'
 import { Section } from './Section'
-import { Heading } from './Heading'
+import Heading from './Heading'
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
+import { Quote } from 'lucide-react'
 
 // Types
 type Testimonial = {
@@ -78,53 +79,55 @@ export function Testimonials() {
   }, { scope: containerRef })
 
   return (
-    <Section id="testimonials" className="bg-slate-50 py-20 sm:py-24">
-      <div ref={containerRef}>
-        <Heading 
-          ref={headingRef}
-          title="What Our Partners Say" 
-          subtitle="Trusted by leading organizations to deliver impact where it matters most."
-          className="mb-16"
-        />
+    <Section id="testimonials" className="bg-primary py-20 text-white sm:py-24">
+      <div ref={containerRef} >
+        <div ref={headingRef} className="text-center mb-12 ">
+          <Heading 
+            title="What Our Partners Say" 
+            subtitle="Trusted by leading organizations to deliver impact where it matters most."
+            light
+          />
+        </div>
 
         <div ref={gridRef} className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {testimonials.map((item) => (
             <div 
               key={item.id} 
-              className="bg-white p-8 rounded-xl shadow-sm border border-slate-100 hover:shadow-md transition-all duration-300 flex flex-col h-full"
+              className="bg-white/5 backdrop-blur-sm border border-white/10 p-8 rounded-2xl relative"
             >
               {/* Quote Icon */}
-              <div className="text-primary/20 mb-6">
+              {/* <div className="absolute top-6 right-6 w-10 h-10 text-accent/20">
                 <svg width="40" height="40" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M14.017 21L14.017 18C14.017 16.8954 14.9124 16 16.017 16H19.017C19.5693 16 20.017 15.5523 20.017 15V9C20.017 8.44772 19.5693 8 19.017 8H15.017C14.4647 8 14.017 8.44772 14.017 9V11C14.017 11.5523 13.5693 12 13.017 12H12.017V5H22.017V15C22.017 18.3137 19.3307 21 16.017 21H14.017ZM5.0166 21L5.0166 18C5.0166 16.8954 5.91203 16 7.0166 16H10.0166C10.5689 16 11.0166 15.5523 11.0166 15V9C11.0166 8.44772 10.5689 8 10.0166 8H6.0166C5.46432 8 5.0166 8.44772 5.0166 9V11C5.0166 11.5523 4.56889 12 4.0166 12H3.0166V5H13.0166V15C13.0166 18.3137 10.3303 21 7.0166 21H5.0166Z" />
                 </svg>
-              </div>
-
-              {/* Message */}
-              <p className="text-slate-600 mb-8 flex-grow leading-relaxed italic">
+              </div> */}
+              <Quote className="absolute top-6 right-6 w-10 h-10 text-accent/20" />
+              <p className="text-blue-100 text-lg italic mb-8 relative z-10">
                 "{item.message}"
               </p>
 
+
+
               {/* Author */}
-              <div className="flex items-center gap-4 mt-auto">
-                <div className="w-12 h-12 rounded-full overflow-hidden bg-slate-200 flex-shrink-0">
+              <div className="flex items-center space-x-4 border-t border-accent/10 pt-6">
+                <div className="w-12 h-12 rounded-full overflow-hidden border border-accent/20 flex-shrink-0">
                   {item.avatar ? (
                     <img 
                       src={item.avatar} 
                       alt={item.name} 
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-cover  rounded-full border-2 border-accent"
                       loading="lazy"
                     />
                   ) : (
-                    <div className="w-full h-full flex items-center justify-center text-slate-500 font-bold">
+                    <div className="w-full h-full flex items-center justify-center text-foreground font-bold">
                       {item.name.charAt(0)}
                     </div>
                   )}
                 </div>
                 <div>
-                  <h4 className="font-bold text-slate-900">{item.name}</h4>
-                  <p className="text-sm text-slate-500">{item.role}</p>
-                  <p className="text-xs text-primary font-medium mt-0.5">{item.organization}</p>
+                  <h4 className="font-bold text-blue-100">{item.name}</h4>
+                  <p className="text-sm text-blue-100">{item.role}</p>
+                  <p className="text-xs text-blue-100 font-medium mt-0.5">{item.organization}</p>
                 </div>
               </div>
             </div>

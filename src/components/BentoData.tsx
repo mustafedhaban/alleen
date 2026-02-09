@@ -14,6 +14,7 @@ import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { Section } from './Section'
+import Heading from './Heading'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -68,10 +69,10 @@ export default function BentoData() {
     <Section  id="sectors-bento" className="py-20 sm:py-24 bg-slate-50 overflow-hidden">
       <div className="container-default">
         <div ref={headingRef} className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="section-title">Sectors of Expertise</h2>
-          <p className="section-subtitle">
-            We work with a diverse range of sectors to deliver tailored solutions.
-          </p>
+          <Heading 
+            title="Sectors of Expertise" 
+            subtitle="We work with a diverse range of sectors to deliver tailored solutions."
+          />
         </div>
 
         <div ref={carouselRef} className="relative">

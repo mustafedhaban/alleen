@@ -1,7 +1,7 @@
 import React from 'react'
 import { Section } from './Section'
 import { clients } from '../data/clients'
-import { Heading } from './Heading'
+import Heading from './Heading'
 import { useScrollAnimation, useStaggerAnimation } from '../hooks/useScrollAnimation'
 
 // Map sectors to "Logo-like" SVG representations
@@ -24,31 +24,25 @@ export const Clients = React.memo(function Clients() {
   return (
     <Section className="py-24 bg-white">
       <div>
-        <Heading 
-          ref={headingRef}
+        <Heading  
           title="Our Customers" 
           subtitle="Trusted by organizations across the development ecosystem."
-          className="mb-16"
         />
         
-        <div ref={gridRef} className="grid grid-cols-2 md:grid-cols-4 border-t border-l border-slate-100">
+        <div ref={gridRef} className="grid grid-cols-2 md:grid-cols-4 gap-6">
           {clients.map((c, i) => (
             <div 
               key={c} 
-              className="group flex flex-col items-center justify-center p-8 border-b border-r border-slate-100 hover:bg-slate-50 transition-colors duration-300 aspect-[3/2]"
+              className="group flex flex-col items-center justify-center p-6 aspect-[3/2]"
             >
-              <div className="text-slate-300 group-hover:text-primary transition-colors duration-300 mb-4">
+              <div className="text-slate-400 transition-colors duration-300 mb-3">
                 {getSectorIcon(i)}
               </div>
-              <span className="text-sm font-bold text-slate-400 group-hover:text-slate-900 transition-colors duration-300 uppercase tracking-wider text-center">
+              <span className="text-sm font-medium text-slate-600 text-center">
                 {c}
               </span>
             </div>
           ))}
-          {/* Empty filler cell to complete the grid if needed, or leave as is */}
-          {clients.length % 4 !== 0 && (
-            <div className="hidden md:block border-b border-r border-slate-100 bg-slate-50/30" />
-          )}
         </div>
       </div>
     </Section>

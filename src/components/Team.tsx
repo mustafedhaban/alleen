@@ -1,6 +1,6 @@
 import React from 'react'
 import { Section } from './Section'
-import { Heading } from './Heading'
+import Heading from './Heading'
 import { useScrollAnimation, useStaggerAnimation } from '../hooks/useScrollAnimation'
 
 type TeamMember = {
@@ -16,40 +16,40 @@ type TeamMember = {
 const team: TeamMember[] = [
   {
     id: '1',
-    name: 'Dr. Sarah Al-Fayed',
-    title: 'Managing Director',
-    bio: 'Over 15 years of experience in international development and strategic policy across the Horn of Africa.',
-    image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=500&auto=format&fit=crop&q=80',
-    linkedin: '#',
-    email: 'sarah@alleenconsultancy.com'
+    name: 'Ahmed M. Ibrahim',
+    title: 'Creative Director',
+    bio: 'Leads the creative vision of Alleen Consultancy, shaping brand identity, storytelling, and visual strategy to deliver impactful and innovative solutions.',
+    image: './Ahmed.jpeg',
+    linkedin: 'https://www.linkedin.com/in/ahmedbubaal',
+    email: 'ahmed@alleenconsultancy.com'
   },
   {
     id: '2',
-    name: 'James Mwangi',
-    title: 'Head of Operations',
-    bio: 'Expert in program management and operational efficiency with a focus on humanitarian logistics.',
-    image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=500&auto=format&fit=crop&q=80',
-    linkedin: '#',
-    email: 'james@alleenconsultancy.com'
+    name: 'Mohamed H. Jama',
+    title: 'Managing Director',
+    bio: 'Oversees overall operations and strategic direction while also leading professional trainings and workshops focused on capacity building, leadership, and organizational development.',
+    image: './harirr.png',
+    linkedin: 'https://www.linkedin.com/in/mohamedhjamal',
+    email: 'mohamed@alleenconsultancy.com'
   },
   {
     id: '3',
-    name: 'Amina Hassan',
-    title: 'Senior Policy Advisor',
-    bio: 'Specializes in governance frameworks and community-led advocacy strategies for sustainable change.',
-    image: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&h=500&auto=format&fit=crop&q=80',
-    linkedin: '#',
-    email: 'amina@alleenconsultancy.com'
-  },
-  {
-    id: '4',
-    name: 'David Ochieng',
-    title: 'MEAL Specialist',
-    bio: 'Data scientist and evaluation expert dedicated to measuring impact and optimizing program outcomes.',
-    image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=500&auto=format&fit=crop&q=80',
-    linkedin: '#',
-    email: 'david@alleenconsultancy.com'
+    name: 'Mustafe A. Ali',
+    title: 'Head of Technology and Finance',
+    bio: 'Manages technological systems and financial operations, ensuring secure infrastructure, transparent processes, and long-term sustainability.',
+    image: './mustafe.png',
+    linkedin: 'https://www.linkedin.com/in/mustafaali',
+    email: 'mustafa@alleenconsultancy.com'
   }
+  // {
+  //   id: '4',
+  //   name: 'David Ochieng',
+  //   title: 'MEAL Specialist',
+  //   bio: 'Data scientist and evaluation expert dedicated to measuring impact and optimizing program outcomes.',
+  //   image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=500&auto=format&fit=crop&q=80',
+  //   linkedin: '#',
+  //   email: 'david@alleenconsultancy.com'
+  // }
 ]
 
 export const Team = React.memo(function Team() {
@@ -60,10 +60,10 @@ export const Team = React.memo(function Team() {
     <Section id="team" className="py-20 sm:py-24">
       <div>
         <Heading 
-          ref={headingRef}
+              
           title="Our Leadership Team" 
           subtitle="A multidisciplinary team of experts dedicated to driving sustainable change."
-          className="mb-16"
+            
         />
 
         <div ref={gridRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
